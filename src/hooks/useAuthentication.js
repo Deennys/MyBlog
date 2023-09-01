@@ -1,6 +1,8 @@
+import { db } from '../firebase/config';
+
 import {
     getAuth,
-    createUserWothEmailAndPassword,
+    createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     updateProfile,
     signOut
@@ -8,7 +10,7 @@ import {
 
 import { useState, useEffect } from 'react';
 
-export function userAuthentication() {
+export function UserAuthentication() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(null);
 
@@ -23,4 +25,54 @@ export function userAuthentication() {
             return;
         }
     }
+
+    async function createUser(data) {
+        checkIfIsCancelled();
+
+        setLoading(true);
+        setError(null)
+
+        try{
+            const {user} = await createUserWithEmailAndPassword(
+                auth,
+                data.email,
+                data.password
+            )
+
+            await updateProfile(user, {
+                displayName: data.displayName
+            })
+            
+            setLoading(false)
+            return user;
+
+        }catch (error) {
+            console.log(error.message)
+            console.log(typeof error.message)
+
+            let systemErrorMessage
+
+            if(error.message.includes('Password') || error.message.includes('email-already')) {
+                systemErrorMessage = error.message.replace('Firebase: ', '');
+            } else {
+                systemErrorMessage = 'There was an error, please try again later';
+            }
+
+            setError(systemErrorMessage)
+            setLoading(false)
+        }
+
+    };
+
+    useEffect(() => {
+        return () => setCancelled(true);
+    }, [])
+
+    return {
+        auth,
+        createUser,
+        error,
+        loading
+    };
+
 }
