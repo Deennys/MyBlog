@@ -16,6 +16,8 @@ import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
+import CreatePost from "./pages/CreatePost/CreatePost";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 //context
 import { AuthProvider } from "./context/AuthContext";
@@ -35,7 +37,7 @@ export default function App() {
   }, [auth])
 
   if(loadingUser) {
-    return <p>Carregando...</p>
+    return <p>Loading...</p>
   }
 
 
@@ -50,6 +52,8 @@ export default function App() {
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/posts/create" element={<CreatePost />} />
+              <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
           </div>
           <Footer />
