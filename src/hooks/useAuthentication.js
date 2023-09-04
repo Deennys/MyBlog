@@ -52,7 +52,7 @@ export function UseAuthentication() {
 
             let systemErrorMessage
 
-            if(error.message.includes('Password') || error.message.includes('email-already')) {
+            if(error.message.includes('user-not-found') || error.message.includes('wrong-password')) {
                 systemErrorMessage = error.message.replace('Firebase: ', '');
             } else {
                 systemErrorMessage = 'There was an error, please try again later';
@@ -70,6 +70,35 @@ export function UseAuthentication() {
         signOut(auth)
     };
 
+    async function login(data) {
+        checkIfIsCancelled();
+
+        setLoading(true)
+        setError(false)
+
+        try {
+            await signInWithEmailAndPassword(auth, data.email, data.password);
+
+        } catch (error) {
+            console.log(error.message)
+            console.log(typeof error.message)
+
+            let systemErrorMessage
+
+            if(error.message.includes('wrong-password')) {
+                systemErrorMessage = 'Incorrect password, please try again';
+            } else if (error.message.includes('user-not-found')) {
+                systemErrorMessage = 'Incorrect email, please try again';
+            } else {
+                systemErrorMessage = 'There was an error, please try again later';
+            }
+
+            setError(systemErrorMessage)
+            setLoading(false)
+        }
+    }
+
+
     useEffect(() => {
         return () => setCancelled(true);
     }, [])
@@ -79,7 +108,8 @@ export function UseAuthentication() {
         createUser,
         error,
         loading,
-        logout
+        logout,
+        login
     };
 
 }
