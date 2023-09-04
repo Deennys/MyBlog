@@ -9,22 +9,26 @@ import About from "./pages/About/About";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 
+//context
+import { AuthProvider } from "./context/AuthContext";
 
 export default function App() {
   return (
     <div className={styles.container}>
-      <BrowserRouter>
-        <Navbar/>
-        <div className="container">
-          <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/about" element={<About/>}/>
-            <Route path="/login" element={<Login />}/>
-            <Route path="/register" element={<Register/>}/>
-          </Routes>
-        </div>
-      <Footer />
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Navbar />
+          <div className="container">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Routes>
+          </div>
+          <Footer />
+        </BrowserRouter>
+      </AuthProvider>
     </div>
   )
 }
