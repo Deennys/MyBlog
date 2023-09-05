@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { UseAuthentication } from "../../hooks/UseAuthentication";
+import { useAuthentication } from "../../hooks/useAuthentication";
 import { useAuthValue } from "../../context/AuthContext";
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
     const { user } = useAuthValue();
-    const { logout } = UseAuthentication();
+    const { logout } = useAuthentication();
 
 
     return (

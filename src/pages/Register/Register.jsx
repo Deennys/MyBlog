@@ -1,4 +1,4 @@
-import { UseAuthentication } from "../../hooks/UseAuthentication";
+import { useAuthentication } from "../../hooks/useAuthentication";
 import styles from "./Register.module.css";
 
 import { useState, useEffect } from "react";
@@ -10,7 +10,7 @@ export default function Register() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     
-    const {createUser, error: authError, loading} = UseAuthentication();
+    const {createUser, error: authError, loading} = useAuthentication();
 
     async function handleSubmit(e) {
         e.preventDefault();

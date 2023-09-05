@@ -1,6 +1,6 @@
 import styles from "./Login.module.css";
 import { useState, useEffect } from "react";
-import { UseAuthentication } from "../../hooks/UseAuthentication";
+import { useAuthentication } from "../../hooks/useAuthentication";
 
 
 export default function Login() {
@@ -8,7 +8,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   
-  const {login, error: authError, loading} = UseAuthentication();
+  const {login, error: authError, loading} = useAuthentication();
 
   async function handleSubmit(e) {
       e.preventDefault();

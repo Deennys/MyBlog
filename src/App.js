@@ -5,7 +5,7 @@ import { onAuthStateChanged } from "firebase/auth";
 
 //hooks
 import { useState, useEffect } from "react";
-import { UseAuthentication } from "./hooks/UseAuthentication";
+import { useAuthentication } from "./hooks/useAuthentication";
 
 //components
 import Navbar from "./components/Navbar/Navbar";
@@ -24,7 +24,7 @@ import { AuthProvider } from "./context/AuthContext";
 
 export default function App() {
   const [user, setUser] = useState(undefined);
-  const {auth} = UseAuthentication();
+  const {auth} = useAuthentication();
 
   const loadingUser = user === undefined;
 
