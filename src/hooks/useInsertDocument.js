@@ -17,11 +17,11 @@ function insertReducer(state, action) {
         case 'INSERTED_DOC':
             return {
                 loading: false,
-                error: false
+                error: null
             }
         case 'ERROR':
             return {
-                loading: true,
+                loading: false,
                 error: action.payload
             }
         default:
