@@ -16,25 +16,39 @@ export default function CreatePost() {
 
     const {insertDocument, response} = useInsertDocument('posts')
 
+    const navigate = useNavigate();
+
     function handleSubmit(e) {
         e.preventDefault();
         setFormError('');
 
         // validate image URL
+        try {
+            new URL(image)
+        } catch (error) {
+            setFormError('The image needs to be in URL format.')
+        }
 
         // criar o array de tags
+        const tagsArray = tags.split(',').map(tag => tag.trim().toLowerCase())
 
         // checar todos os valores
+        if(title || image || body || tagsArray) {
+            setFormError('Please complete all fields');
+        }
+
+        if (formError) return;
 
         insertDocument({
             title,
             image,
             body,
-            tags,
+            tagsArray,
             uid: user.uid,
             createdBy: user.displayName
         })
 
+        navigate('/');
     }
 
 
@@ -88,6 +102,7 @@ export default function CreatePost() {
                 </label>
                 <button className="btn" disabled={response.loading}>{response.loading ? 'Wait...' : 'Register'}</button>
                 {response.error && <p className="error">{response.error}</p>}
+                {formError && <p className="error">{formError}</p>}
             </form>
         </div>
     )
