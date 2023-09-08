@@ -9,8 +9,14 @@ export default function Home() {
   const [query, setQuery] = useState('');
   const {documents: posts, loading} = useFetchDocuments('posts');
 
+  const navigate = useNavigate();
+
   function handleSubmit(e) {
     e.preventDefault()
+
+    if (query) {
+      return navigate(`/search?q=${query}`)
+    }
   }
 
   return (
