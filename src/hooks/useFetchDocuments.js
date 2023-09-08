@@ -20,9 +20,10 @@ export function useFetchDocuments(docCollection, search = null, uid = null) {
 
             try {
                 let q;
-                q= await query(collectionRef, orderBy("createdAt", "desc"));
+                q= await query(collectionRef, orderBy("createAt", "desc"));
 
                 await onSnapshot(q, (QuerySnapshot) => {
+                    console.log(QuerySnapshot)
                     setDocuments (
                         QuerySnapshot.docs.map((doc) => ({
                             id: doc.id,
@@ -30,7 +31,6 @@ export function useFetchDocuments(docCollection, search = null, uid = null) {
                         }))
                     )
                 })
-
                 setLoading(false)
             } catch (error) {
                 console.error(error);
@@ -46,5 +46,5 @@ export function useFetchDocuments(docCollection, search = null, uid = null) {
         return () => setCancelled(true)
     }, [])
 
-    return documents, loading, error;
+    return {documents, loading, error};
 }
