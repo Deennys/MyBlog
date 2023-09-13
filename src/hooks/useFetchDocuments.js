@@ -22,13 +22,12 @@ export function useFetchDocuments(docCollection, search = null, uid = null) {
                 let q;
 
                 if(search) {
-                    q = await query(collectionRef, where('tags', 'array-contains', search), orderBy('createAt', 'desc'))
+                    q = await query(collectionRef, where('tagsArray', 'array-contains', search), orderBy('createAt', 'desc'))
                 } else {
                     q = await query(collectionRef, orderBy("createAt", "desc"));
                 }
 
                 await onSnapshot(q, (QuerySnapshot) => {
-                    console.log(QuerySnapshot)
                     setDocuments (
                         QuerySnapshot.docs.map((doc) => ({
                             id: doc.id,
