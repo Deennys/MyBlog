@@ -10,27 +10,59 @@ export default function Dashboard() {
   const { user } = useAuthValue()
   const uid = user.uid
 
-   const {documents: posts, loading} = useFetchDocuments('posts', null, uid);
+  const { documents: posts, loading } = useFetchDocuments('posts', null, uid);
+
+  if (loading) {
+    return (
+      <div className={styles.loading}>
+        <p>Loading</p>
+        <div className={styles.dot_typing}></div>
+      </div>
+    )
+  }
+
+  function deleteDocument(id) {
+    
+  }
 
   return (
-    <div>
+    <div className={styles.dashboard}>
       <h2>Dashboard</h2>
-      <p>Manage your posts</p>
-      {posts?.length === 0
-        ? (
-          <div className={styles.noposts}>
-            <p>No posts</p>
-            <Link to="/posts/create" className='btn'>Create first post</Link>
+      <p>Gerencie os seus posts</p>
+      {posts && posts.length === 0 ? (
+        <div className={styles.noposts}>
+          <p>Não foram encontrados posts</p>
+          <Link to="/posts/create" className="btn">
+            Criar primeiro post
+          </Link>
+        </div>
+      ) : (
+        <div className={styles.post_header}>
+          <span>Título</span>
+          <span>Ações</span>
+        </div>
+      )}
+
+      {posts &&
+        posts.map((post) => (
+          <div className={styles.post_row} key={post.id}>
+            <p>{post.title}</p>
+            <div className={styles.actions}>
+              <Link to={`/posts/${post.id}`} className="btn btn-outline">
+                Ver
+              </Link>
+              <Link to={`/posts/edit/${post.id}`} className="btn btn-outline">
+                Editar
+              </Link>
+              <button
+                onClick={() => deleteDocument(post.id)}
+                className="btn btn-outline btn-danger"
+              >
+                Excluir
+              </button>
+            </div>
           </div>
-        ) : (
-          <div>
-            <p>You have posts!</p>
-          </div>
-        )
-      }
-      {posts?.map((post) => (
-        <h3>{post.title}</h3>
-      ))}
+        ))}
     </div>
   )
 }

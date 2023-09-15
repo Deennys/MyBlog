@@ -1,0 +1,109 @@
+.dashboard {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard h2 {
+  font-size: 2.2em;
+  margin-bottom: 0.5em;
+}
+
+.dashboard p {
+  color: #aaa;
+  margin-bottom: 1em;
+}
+
+.noposts {
+  text-align: center;
+}
+
+.noposts p {
+  margin-bottom: 1.5em;
+}
+
+.noposts a {
+  padding: 10px 25px;
+}
+
+.post_header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  border-bottom: 2px solid #ccc;
+  width: 80%;
+  padding: 10px;
+}
+
+.post_row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  width: 80%;
+  padding: 10px;
+}
+
+.post_row p {
+  color: #000;
+}
+
+.post_row button,
+.post_row a {
+  margin: 0 5px;
+  height: 30px;
+  width: 100px;
+  font-size: 0.7em;
+}
+
+
+.loading {
+  display: flex;
+  gap: 20px;
+  height: 100vh;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.loading p {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.dot_typing {
+  position: relative;
+  left: -9999px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #000;
+  color: #000;
+  box-shadow: 9984px 0 0 0 #000, 9999px 0 0 0 #000, 10014px 0 0 0 #000;
+  animation: dot-typing 1.5s infinite linear;
+}
+
+@keyframes dot-typing {
+  0% {
+    box-shadow: 9984px 0 0 0 #000, 9999px 0 0 0 #000, 10014px 0 0 0 #000;
+  }
+  16.667% {
+    box-shadow: 9984px -10px 0 0 #000, 9999px 0 0 0 #000, 10014px 0 0 0 #000;
+  }
+  33.333% {
+    box-shadow: 9984px 0 0 0 #000, 9999px 0 0 0 #000, 10014px 0 0 0 #000;
+  }
+  50% {
+    box-shadow: 9984px 0 0 0 #000, 9999px -10px 0 0 #000, 10014px 0 0 0 #000;
+  }
+  66.667% {
+    box-shadow: 9984px 0 0 0 #000, 9999px 0 0 0 #000, 10014px 0 0 0 #000;
+  }
+  83.333% {
+    box-shadow: 9984px 0 0 0 #000, 9999px 0 0 0 #000, 10014px -10px 0 0 #000;
+  }
+  100% {
+    box-shadow: 9984px 0 0 0 #000, 9999px 0 0 0 #000, 10014px 0 0 0 #000;
+  }
+}
