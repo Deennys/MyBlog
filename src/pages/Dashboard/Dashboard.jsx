@@ -5,11 +5,13 @@ import { Link } from 'react-router-dom';
 //hooks
 import { useAuthValue } from '../../context/AuthContext';
 import { useFetchDocuments } from '../../hooks/useFetchDocuments';
+import { useDeleteDocument } from '../../hooks/useDeleteDocument'; 
 
 export default function Dashboard() {
   const { user } = useAuthValue()
   const uid = user.uid
 
+  const { deleteDocument } = useDeleteDocument('posts')
   const { documents: posts, loading } = useFetchDocuments('posts', null, uid);
 
   if (loading) {
@@ -19,10 +21,6 @@ export default function Dashboard() {
         <div className={styles.dot_typing}></div>
       </div>
     )
-  }
-
-  function deleteDocument(id) {
-    
   }
 
   return (
