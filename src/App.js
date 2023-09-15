@@ -23,6 +23,7 @@ import Post from "./pages/Post/Post";
 
 //context
 import { AuthProvider } from "./context/AuthContext";
+import EditPost from "./pages/EditPost/EditPost";
 
 export default function App() {
   const [user, setUser] = useState(undefined);
@@ -61,6 +62,7 @@ export default function App() {
               <Route path="/posts/:id" element={<Post />} />
               <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
               <Route path="/register" element={user ? <Navigate to="/" /> : <Register />} />
+              <Route path="/posts/edit/:id" element={user ? <EditPost /> : <Navigate to="/login" />} />
               <Route path="/posts/create" element={user ? <CreatePost /> : <Navigate to="/login" />} />
               <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
             </Routes>

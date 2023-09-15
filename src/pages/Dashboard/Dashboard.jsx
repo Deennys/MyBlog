@@ -11,7 +11,7 @@ export default function Dashboard() {
   const { user } = useAuthValue()
   const uid = user.uid
 
-  const { deleteDocument } = useDeleteDocument('posts')
+  const { deleteDocument } = useDeleteDocument('posts                             ')
   const { documents: posts, loading } = useFetchDocuments('posts', null, uid);
 
   if (loading) {
