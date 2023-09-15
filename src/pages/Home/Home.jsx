@@ -8,7 +8,7 @@ import PostDetails from "../../components/PostDetails/PostDetails";
 export default function Home() {
   const [query, setQuery] = useState('');
   const {documents: posts, loading} = useFetchDocuments('posts');
-
+  console.log(loading)
   const navigate = useNavigate();
 
   function handleSubmit(e) {

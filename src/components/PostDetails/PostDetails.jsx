@@ -3,7 +3,6 @@ import styles from './PostDetails.module.css';
 import { Link } from 'react-router-dom';
 
 export default function PostDetails({post}) {
-  console.log(post.id)
   return (
     <div className={styles.post_detail}>
         <img src={post.image} alt={post.title} />

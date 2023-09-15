@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { db } from "../firebase/config";
-import { collection, query, orderBy, onSnapshot, where } from "firebase/firestore";
+import { collection, query, orderBy, onSnapshot, where, QuerySnapshot } from "firebase/firestore";
 
 export function useFetchDocuments(docCollection, search = null, uid = null) {
     const [documents, setDocuments] = useState(null);
@@ -23,6 +23,8 @@ export function useFetchDocuments(docCollection, search = null, uid = null) {
 
                 if(search) {
                     q = await query(collectionRef, where('tagsArray', 'array-contains', search), orderBy('createAt', 'desc'))
+                } else if (uid) {
+                    q = await query(collectionRef, where('uid', '==', uid), orderBy('createAt', 'desc'))
                 } else {
                     q = await query(collectionRef, orderBy("createAt", "desc"));
                 }
