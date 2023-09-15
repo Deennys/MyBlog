@@ -3,7 +3,7 @@ import styles from "./EditPost.module.css";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuthValue } from "../../context/AuthContext";
-import { useInsertDocument } from "../../hooks/useInsertDocument";
+import { useUpdateDocument } from "../../hooks/useUpdateDocument";
 import { useFetchDocument } from "../../hooks/useFetchDocument";
 
 export default function EditPost() {
@@ -30,7 +30,7 @@ export default function EditPost() {
 
     const { user } = useAuthValue()
 
-    const { insertDocument, response } = useInsertDocument('posts')
+    const { updateDocument, response } = useUpdateDocument('posts')
 
     const navigate = useNavigate();
 
@@ -55,7 +55,7 @@ export default function EditPost() {
 
         if (formError) return;
 
-        insertDocument({
+        updateDocument({
             title,
             image,
             body,
@@ -64,7 +64,7 @@ export default function EditPost() {
             createdBy: user.displayName
         })
 
-        navigate('/');
+        navigate('/dashboard');
     }
 
 
